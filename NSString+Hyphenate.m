@@ -49,10 +49,11 @@
     localeIdentifier = [locale localeIdentifier];
     
     if (bundle == nil) {
-        NSString* bundlePath = [[[NSBundle mainBundle] resourcePath] 
+/*        NSString* bundlePath = [[[NSBundle mainBundle] resourcePath] 
                                 stringByAppendingPathComponent:
                                 @"Hyphenate.bundle"];
-        bundle = [NSBundle bundleWithPath:bundlePath];
+        bundle = [NSBundle bundleWithPath:bundlePath];*/
+        bundle = [NSBundle mainBundle];
     }
     
     if (dict == NULL) {
@@ -109,7 +110,7 @@
             [result appendString:token];
         } else {
             char const* tokenChars = [[token lowercaseString] UTF8String];
-            wordLength = strlen(tokenChars);
+            wordLength = token.length;//strlen(tokenChars); -- utf8
             // This is the buffer size the algorithm needs.
             hyphens = (char*)malloc(wordLength + 5); // +5, see hypen.h 
             rep = NULL; // Will be allocated by the algorithm
